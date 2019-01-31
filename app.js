@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
 
 
 
-app.get('/', (req, res) => {
+app.get('/pharmacies', (req, res) => {
     PharmacyModel.find({}, function (err, pharmacies) {
         if (err) {
             res.json({"err": err});
@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 
 
 
-app.post('/', (req, res) => {
+app.post('/pharmacies', (req, res) => {
 
     console.log(req.body);
 
@@ -69,6 +69,26 @@ app.post('/', (req, res) => {
 
     });
 
+
+
+app.post('/edit', (req, res) => {
+
+    console.log(req.body);
+
+    let pharmacy = new PharmacyModel({
+        name: req.body.name,
+        longitude: req.body.long,
+        latitude: req.body.lat,
+        registered: false
+    });
+
+    pharmacy.save().then(result => {
+        res.send(result);
+    }).catch(err => {
+        res.send(err);
+    });
+
+});
 
 
 
