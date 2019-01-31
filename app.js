@@ -71,22 +71,15 @@ app.post('/pharmacies', (req, res) => {
 
 
 
-app.post('/edit', (req, res) => {
+app.post('/pharmacies/edit', (req, res) => {
 
-    console.log(req.body);
-
-    let pharmacy = new PharmacyModel({
-        name: req.body.name,
-        longitude: req.body.long,
-        latitude: req.body.lat,
-        registered: false
+    PharmacyModel.updateOne({ _id: req.body.id }, { $set: { registered: req.body.registered, name: req.body.name }}, function(result, err){
+        if(err)
+            res.json({"err": err})
+        else
+            res.json({result});
     });
 
-    pharmacy.save().then(result => {
-        res.send(result);
-    }).catch(err => {
-        res.send(err);
-    });
 
 });
 
