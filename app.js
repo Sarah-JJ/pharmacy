@@ -74,10 +74,14 @@ app.post('/pharmacies', (req, res) => {
 app.post('/pharmacies/edit', (req, res) => {
 
     PharmacyModel.updateOne({ _id: req.body.id }, { $set: { registered: req.body.registered, name: req.body.name }}, function(result, err){
-        if(err)
+        if(err) {
+            console.log(err);
             res.json({"err": err})
-        else
+        }
+        else {
+            console.log(result);
             res.json({result});
+        }
     });
 
 
