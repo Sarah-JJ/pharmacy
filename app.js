@@ -73,7 +73,7 @@ app.post('/pharmacies', (req, res) => {
 
 app.post('/pharmacies/edit', (req, res) => {
 
-    PharmacyModel.updateOne({ _id: req.body.id }, { $set: { registered: req.body.registered}}, function(result, err){
+    PharmacyModel.updateOne({ _id: req.body.id }, { registered: req.body.registered, name: req.body.name }, function(result, err){
         if(err) {
             console.log(err);
             res.json({"err": err})
@@ -97,7 +97,7 @@ const pharmacySchema = mongoose.Schema({
     name: String,
     longitude: SchemaTypes.Double,
     latitude: SchemaTypes.Double,
-    registered: false
+    registered: Boolean
 
 });
 
