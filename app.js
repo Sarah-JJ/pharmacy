@@ -33,8 +33,8 @@ app.use(express.json());
 
 app.use(function (req, res, next) {
     console.log(req.body);
-    console.log(req.body.id);
-    console.log(req.body._id);
+    console.log("id: " + req.body.id);
+    console.log("_id: " + req.body._id);
     next()
 });
 
