@@ -75,7 +75,7 @@ app.post('/pharmacies', (req, res) => {
 
 app.post('/pharmacies/edit', (req, res) => {
 
-    PharmacyModel.updateOne({ _id: req.body.id }, { registered: req.body.registered, name: req.body.name }, function(result, err){
+    PharmacyModel.updateOne({ _id: req.body._id }, { registered: req.body.registered, name: req.body.name }, function(result, err){
         if(err) {
             console.log(err);
             res.json({"err": err})
