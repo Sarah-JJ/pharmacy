@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 require('mongoose-double')(mongoose);
+const users = require('./routes/users');
 const cors = require('cors');
 
 
@@ -33,12 +34,10 @@ app.use(express.json());
 
 app.use(function (req, res, next) {
     console.log(req.body);
-    console.log("id: " + req.body.id);
-    console.log("_id: " + req.body._id);
     next()
 });
 
-
+app.use('/api/users', users);
 
 app.get('/pharmacies', (req, res) => {
     PharmacyModel.find({}, function (err, pharmacies) {
@@ -81,7 +80,7 @@ app.post('/pharmacies/edit', (req, res) => {
             res.json({"err": err})
         }
         else {
-            console.log(result);
+            console.log(result);hd
             res.json({result});
         }
     });
